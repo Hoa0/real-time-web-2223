@@ -1,10 +1,12 @@
-let socket = io()
-let messages = document.querySelector('section ul')
-let input = document.querySelector('input')
+let socket = io();
+let messages = document.querySelector('section ul');
+let input = document.querySelector('input');
 const fallback = document.querySelector(".fallback");
+const onlinePlayers = document.querySelector('.listOfPeople');
 
+let username = [];
 
-const username = window.prompt("Enter your username");
+username = window.prompt("Enter your username");
 socket.emit('newUser', username);
 
 document.querySelector('form').addEventListener('submit', event => {
@@ -14,6 +16,27 @@ document.querySelector('form').addEventListener('submit', event => {
         input.value = ''
     }
 })
+
+const addUsers = (playerName) => {
+    if (!!document.querySelector(`.${playerName}-userlist`)) {
+        return;
+    }
+
+    const userContainer =
+        `<div class="chat_ib ${playerName}-userlist">
+        <h2>${playerName}</h2>
+    </div>`;
+    onlinePlayers.innerHTML += userContainer;
+};
+
+socket.on('newUser', function (data) {
+    data.map((user) => addUsers(user));
+    addUsers(username);
+});
+
+socket.on('userDisconnected', function (playerName) {
+    document.querySelector(`.${playerName}-userlist`).remove();
+});
 
 // add message
 socket.on('sendMessage', message => {

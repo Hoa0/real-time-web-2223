@@ -18,6 +18,8 @@ app.use(express.static(path.resolve('public')));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+const activeUsers = new Set();
+
 // Set up a route
 app.get('/', (req, res) => {
   res.render('index.ejs', {
@@ -40,15 +42,19 @@ io.on('connection', (socket) => {
 
   socket.on('newUser', (user) => {
     socket.username = user;
+    activeUsers.add(user);
+    io.emit('newUser', [...activeUsers]);
     console.log('User connected - Username: ' + socket.username);
   });
 
-  socket.on("typing", (data) => {
-    socket.broadcast.emit("typing", data);
+  socket.on('typing', (data) => {
+    socket.broadcast.emit('typing', data);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected')
+    activeUsers.delete(socket.username);
+    io.emit('userDisconnected', socket.username);
+    console.log('user disconnected');
   })
 })
 
