@@ -2,7 +2,7 @@ let socket = io();
 let messages = document.querySelector('section ul');
 let input = document.querySelector('input');
 const fallback = document.querySelector(".fallback");
-const onlinePlayers = document.querySelector('.listOfPeople');
+const onlinePlayers = document.querySelector('#listOfPeople');
 const imgContainer = document.getElementById('coffeeImg');
 const btnContainer = document.getElementById('answersBtn');
 const newCoffeeBtn = document.getElementById('showCoffee');
@@ -26,18 +26,18 @@ const addUsers = (playerName) => {
     }
 
     const userContainer =
-        `<div class="chat_ib ${playerName}-userlist">
-        <h2>${playerName}</h2>
-    </div>`;
+        `<li class="${playerName}-userlist">
+        ${playerName}
+    </li>`;
     onlinePlayers.innerHTML += userContainer;
 };
 
-socket.on('newUser', function (data) {
+socket.on('newUser',(data) => {
     data.map((user) => addUsers(user));
     addUsers(username);
 });
 
-socket.on('userDisconnected', function (playerName) {
+socket.on('userDisconnected', (playerName) => {
     // document.querySelector(`.${playerName}-userlist`).remove();
     const userContainer = document.querySelector(`.${playerName}-userlist`);
     if (userContainer) {
@@ -46,7 +46,7 @@ socket.on('userDisconnected', function (playerName) {
 });
 
 // add message
-socket.on('sendMessage', message => {
+socket.on('sendMessage', (message) => {
     messages.appendChild(Object.assign(document.createElement('li'), {
         textContent: message.user + ' : ' + message.message
     }))
@@ -61,6 +61,7 @@ input.addEventListener("keyup", () => {
     });
 });
 
+// user is typing
 socket.on("typing", (data) => {
     const {
         isTyping,
@@ -99,7 +100,7 @@ const renderCoffeeData = ({
 
 newCoffeeBtn.addEventListener('click', () => {
     socket.emit('getRandomCoffee');
-  });
+});
 
 socket.on('coffeeData', (data) => {
     renderCoffeeData(data);
