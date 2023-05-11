@@ -7,6 +7,7 @@ const app = express();
 const http = require('http').createServer(app);
 const path = require('path');
 const io = require('socket.io')(http);
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 // Set the port for the server to listen on
 const port = process.env.PORT || 3002;
@@ -19,6 +20,19 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 
 const activeUsers = new Set();
+const apiUrl = 'https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json';
+
+const getRandomCoffee = async () =>{
+  return fetch(apiUrl)
+  .then (response => response.json())
+  .then(data =>{
+    const {hot, iced} = data;
+    const allCoffees = [...hot,...iced];
+    const randomIndex = Math.floor(Math.random()* allCoffees.length);
+    return allCoffees[randomIndex];
+  })
+  .catch(error => console.error(error));
+}
 
 // Set up a route
 app.get('/', (req, res) => {
@@ -30,6 +44,23 @@ app.get('/', (req, res) => {
 // Set up socket.io event handlers
 io.on('connection', (socket) => {
   console.log('a user connected')
+
+  socket.on('getRandomCoffee', async() =>{
+    try{
+      const coffee = await getRandomCoffee();
+      const {title,image} = coffee;
+      const optionsBtn = [
+        title, 
+        `${title} Macchiato`,
+        `${title} Latte`,
+        `${title} Espresso`,
+      ].sort(() => Math.random() - 0.5).slice(0,4);
+      socket.emit('coffeeData', {title, image, optionsBtn});
+    } catch(err){
+      console.error(err);
+    }
+  });
+
 
   socket.on('newMessage', (message) => {
 

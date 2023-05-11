@@ -3,6 +3,9 @@ let messages = document.querySelector('section ul');
 let input = document.querySelector('input');
 const fallback = document.querySelector(".fallback");
 const onlinePlayers = document.querySelector('.listOfPeople');
+const imgContainer = document.getElementById('coffeeImg');
+const btnContainer = document.getElementById('answersBtn');
+const newCoffeeBtn = document.getElementById('showCoffee');
 
 let username = [];
 
@@ -70,4 +73,34 @@ socket.on("typing", (data) => {
     }
 
     fallback.innerHTML = `<p>${username} is typing...</p>`;
+});
+
+
+
+//Display coffee api
+const renderCoffeeData = ({
+    title,
+    image,
+    optionsBtn
+}) => {
+    imgContainer.innerHTML = `<img src="${image}" alt="${title}">`;
+
+    btnContainer.innerHTML = '';
+    optionsBtn.forEach(element => {
+        const button = document.createElement('button');
+        button.innerHTML = element;
+        button.addEventListener('click', () => {
+            // iets
+        })
+        btnContainer.appendChild(button);
+    });
+
+};
+
+newCoffeeBtn.addEventListener('click', () => {
+    socket.emit('getRandomCoffee');
+  });
+
+socket.on('coffeeData', (data) => {
+    renderCoffeeData(data);
 });
