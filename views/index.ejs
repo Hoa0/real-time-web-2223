@@ -1,15 +1,24 @@
 <%- include('partials/head'); %>
-<!-- A simple chat - RTW-->
-    <section>
-        <h1>Anonieme chat</h1>
-        <ul></ul>
-        <div class="fallback"></div>
-        <form>
-            <input type="text" autocomplete="off" placeholder="Type a message">
-            <button><span>Send</span></button>
-        </form>
-    </section>
-    <div class="listOfPeople">
-        <h3>Active</h3>
+    <!-- A simple chat - RTW-->
+    <div id="contentContainer">
+        <section class="listOfPeople">
+            <h2>Active</h2>
+            <!-- <ul id="listOfPeople"></ul> -->
+        </section>
+        <section id="chat">
+            <h1>Anonieme chat</h1>
+            <ul></ul>
+            <div class="fallback"></div>
+            <form>
+                <input type="text" autocomplete="off" placeholder="Type a message">
+                <button><span>Send</span></button>
+            </form>
+        </section>
     </div>
+    <!-- coffee -->
+    <h2>Guess the Coffee</h2>
+    <p>Look at the image below and select the correct coffee name:</p>
+    <div id="coffeeImg"></div>
+    <div id="answersBtn"></div>
+    <button id="new-coffee-btn">New Coffee</button>
     <%- include('partials/footer'); %>

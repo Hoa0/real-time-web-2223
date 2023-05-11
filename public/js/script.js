@@ -35,7 +35,11 @@ socket.on('newUser', function (data) {
 });
 
 socket.on('userDisconnected', function (playerName) {
-    document.querySelector(`.${playerName}-userlist`).remove();
+    // document.querySelector(`.${playerName}-userlist`).remove();
+    const userContainer = document.querySelector(`.${playerName}-userlist`);
+    if (userContainer) {
+        userContainer.remove();
+    }
 });
 
 // add message

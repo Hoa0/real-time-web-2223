@@ -9,7 +9,7 @@ const path = require('path');
 const io = require('socket.io')(http);
 
 // Set the port for the server to listen on
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 // Set up middleware to serve static files
 app.use(express.static(path.resolve('public')));
@@ -54,15 +54,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     activeUsers.delete(socket.username);
     io.emit('userDisconnected', socket.username);
-    console.log('user disconnected');
+    console.log('user disconnected', socket.username);
   })
 })
 
 http.listen(port, () => {
   console.log('listening on port ', port)
 })
-
-/**
- * https://github.com/ju5tu5/barebonechat
-   https://socket.io/get-started/chat
- */

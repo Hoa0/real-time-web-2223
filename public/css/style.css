@@ -4,20 +4,21 @@
   box-sizing: border-box;
 }
 
+img{
+  width: 25%;
+}
+
+ul{
+  list-style: none;
+}
+
 div,
 label, h1 {
   margin: 0;
   padding: 0;
 }
 
-.listOfPeople{
-  display: block;
-    height: 5em;
-    background: aquamarine;
-    width: 5em;
-}
-
-h1 {
+h1, h2 {
   font-size: 1.2rem;
   color: rgb(215, 136, 136);
 }
@@ -43,7 +44,7 @@ main {
   align-items: center;
 }
 
-section {
+section#chat {
   width: 20rem;
   height: 30rem;
   background: #fffcf2;
@@ -51,15 +52,30 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
+  /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
 }
 
-section h1 {
+/* section#listOfPeople {
+  width: 20rem;
+  background: #fffcf2;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+ul#listOfPeople{
+  overflow-x: scroll;
+  height: 100%;
+  max-height: 7em;
+}
+
+section#chat h1 {
   padding-top: 1rem;
   font-size: 1rem;
 }
 
-section ul {
+section#chat ul {
   margin: 0 !important;
   padding: 0.2em;
   list-style-type: none;
@@ -72,7 +88,7 @@ section ul {
   background: transparent;
 }
 
-section ul>li {
+section#chat ul>li {
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
   color: rgb(215, 136, 136);
@@ -81,7 +97,7 @@ section ul>li {
   border-radius: 0.3em;
 }
 
-section form {
+section#chat form {
   margin: 0 0 1rem 0;
   padding: 0;
   width: 18rem;
@@ -89,7 +105,7 @@ section form {
   display: flex;
 }
 
-section form input[type='text'] {
+section#chat form input[type='text'] {
   margin: 0;
   padding: 0 1rem;
   border: none;
@@ -104,7 +120,7 @@ section form input[type='text'] {
   outline: none;
 }
 
-section form>button {
+section#chat form>button {
   padding: 0 0.6rem 0 0.4rem;
   width: 2rem;
   background: rgb(239, 238, 238);
@@ -117,19 +133,24 @@ section form>button {
   transition: 0.2s;
 }
 
-section form>button span {
+section#chat form>button span {
   display: none;
 }
 
-section form>button::after {
+section#chat form>button::after {
   content: '⇒';
 }
 
-section form>button:hover {
+section#chat form>button:hover {
   padding-left: 1rem;
 }
 
-section form>button:active {
+section#chat form>button:active {
   padding-left: 1rem;
   color: red;
+}
+
+/*list of players*/
+#listOfPeople{
+  margin-bottom: 0.3em;
 }
