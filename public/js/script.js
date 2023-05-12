@@ -1,18 +1,47 @@
 let socket = io();
-let messages = document.querySelector('section ul');
-let input = document.querySelector('input');
+let messages = document.querySelector('section#chat ul');
+const formMessage = document.getElementById('formChat');
+let input = document.querySelector('#inputChat');
 const fallback = document.querySelector(".fallback");
 const onlinePlayers = document.querySelector('#listOfPeople');
 const imgContainer = document.getElementById('coffeeImg');
 const btnContainer = document.getElementById('answersBtn');
 const newCoffeeBtn = document.getElementById('showCoffee');
+const getScore = document.getElementById('score');
+const rounds = document.getElementById('rounds');
 
 let username = [];
+let currentRound = 0;
+let currentScore = 0;
 
-username = window.prompt("Enter your username");
-socket.emit('newUser', username);
 
-document.querySelector('form').addEventListener('submit', event => {
+// username = window.prompt("Enter your username");
+// socket.emit('newUser', username);
+// getScore.textContent = `Score: ${currentScore}`;
+
+//
+const startGame = () => {
+    // playerName = document.querySelector('#name').value;
+    // nameInput.style.display = 'none';
+    // gameDiv.style.display = 'block';
+    // startNewRound();
+    username = window.prompt("Enter your username");
+    socket.emit('newUser', username);
+    startNewRound();
+}
+
+const startNewRound = () => {
+    currentRound++;
+    rounds.textContent = `Round ${currentRound}`;
+    getScore.textContent = `Score: ${currentScore}`;
+
+    socket.emit('getRandomCoffee');
+}
+startGame();
+
+///
+
+formMessage.addEventListener('submit', event => {
     event.preventDefault()
     if (input.value) {
         socket.emit('newMessage', input.value)
@@ -30,9 +59,10 @@ const addUsers = (playerName) => {
         <span>&#9787; </span>${playerName}
     </li>`;
     onlinePlayers.innerHTML += userContainer;
+    socket.emit('getRandomCoffee');
 };
 
-socket.on('newUser',(data) => {
+socket.on('newUser', (data) => {
     data.map((user) => addUsers(user));
     addUsers(username);
 });
@@ -76,32 +106,65 @@ socket.on("typing", (data) => {
     fallback.innerHTML = `<p>${username} is typing...</p>`;
 });
 
-
-
 //Display coffee api
 const renderCoffeeData = ({
     title,
     image,
     optionsBtn
 }) => {
+    currentCoffee = {
+        title,
+        image
+    };
     imgContainer.innerHTML = `<img src="${image}" alt="${title}">`;
-
     btnContainer.innerHTML = '';
-    optionsBtn.forEach(element => {
+
+    //display coffee titles
+    optionsBtn.forEach((element) => {
         const button = document.createElement('button');
-        button.innerHTML = element;
-        button.addEventListener('click', () => {
-            // iets
-        })
+        button.classList.add('optionBtn');
+        button.textContent = element;
+
+        button.addEventListener('click', handleBtnAnswer);
         btnContainer.appendChild(button);
     });
 
 };
 
-newCoffeeBtn.addEventListener('click', () => {
-    socket.emit('getRandomCoffee');
-});
+// display new coffee
+// newCoffeeBtn.addEventListener('click', () => {
+//     socket.emit('getRandomCoffee');
+// });
 
 socket.on('coffeeData', (data) => {
     renderCoffeeData(data);
 });
+
+const handleBtnAnswer = (event) => {
+    const btnSelect = event.target.textContent;
+
+    if (btnSelect === currentCoffee.title) {
+        currentScore++;
+        // alert(`Correct! The coffee is ${currentCoffee.title}`);
+        socket.emit('newMessage', `Correct! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
+        // socket.emit('getRandomCoffee');
+    } else {
+        // alert(`Wrong! The coffee is ${currentCoffee.title}`);
+        socket.emit('newMessage', `Wrong! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
+        // socket.emit('getRandomCoffee');
+    }
+
+    if (currentRound < 5) {
+        startNewRound();
+    } else{
+        endGame();
+    }
+}
+
+const endGame = () =>{
+    socket.emit('newMessage',`Game over! Your score is ${currentScore}`)
+    currentRound = 0;
+    currentScore = 0;
+}
+// const startBtn = document.querySelector('#start-btn');
+// startBtn.addEventListener('click', startNewRound);

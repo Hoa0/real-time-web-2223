@@ -92,6 +92,8 @@ section#chat ul {
   flex-grow: 2;
   width: 18em;
   overflow-y: scroll;
+  max-height: 30em;
+  margin: 0.5em 0;
 }
 
 ::-webkit-scrollbar {
@@ -172,9 +174,17 @@ main>div>section:nth-of-type(2) {
   margin-left: 0.3em;
 }
 
-main>div>section:nth-of-type(2) p {
+main>div>section:nth-of-type(2)>p:first-of-type {
   text-align: center;
   width: 90%;
+}
+
+/*container round and score */
+main>div>section:nth-of-type(2)>section{
+  display: flex;
+  width: 100%;
+  margin-top: 1em;
+  justify-content: space-evenly;
 }
 
 /* coffee image */
@@ -227,7 +237,7 @@ button#showCoffee {
   font-weight: 400;
   color: #FFFFFF;
   background-color: rgb(215, 136, 136);
-  color:#fff;
+  color: #fff;
   border: 0em solid #fff;
   text-align: center;
   width: 90%;

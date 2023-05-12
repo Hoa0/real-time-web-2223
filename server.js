@@ -21,8 +21,16 @@ app.use(express.static(path.resolve('public')));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-const activeUsers = new Set();
+// Fetch a random coffee from the API
 const apiUrl = 'https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json';
+
+//Creates a new Set object to store active users.
+const activeUsers = new Set();
+
+//score
+let countScore = 0;
+let rounds = 0;
+
 
 const getRandomCoffee = async () => {
   return fetch(apiUrl)
@@ -50,6 +58,7 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('a user connected')
 
+  // Get a random coffee and emit it to the client
   socket.on('getRandomCoffee', async () => {
     try {
       const coffee = await getRandomCoffee();
@@ -73,7 +82,31 @@ io.on('connection', (socket) => {
     }
   });
 
+  // Handle user guesses and emit the result to the client
+  socket.on('guessCoffeeAnswer', (guess) => {
+    const {
+      correctAnswer,
+      userAnswer
+    } = guess;
+    if (correctAnswer === userAnswer) {
+      countScore++;
+    }
+    rounds++;
+    if (rounds === 5) {
+      socket.emit('gameOver', countScore);
+      countScore = 0;
+      rounds = 0;
+     
+    } else {
+      socket.emit('result', {
+        correct: correctAnswer === userAnswer,
+        countScore,
+        rounds
+      });
+    }
+  });
 
+  //When a user sends a message, the code emits a 'sendMessage' event to all connected clients with the message content and the username of the sender.
   socket.on('newMessage', (message) => {
 
     io.emit('sendMessage', {
@@ -83,6 +116,7 @@ io.on('connection', (socket) => {
 
   })
 
+  //emits a 'newUser' event to all connected clients with a list of active users.
   socket.on('newUser', (user) => {
     socket.username = user;
     activeUsers.add(user);
@@ -90,10 +124,12 @@ io.on('connection', (socket) => {
     console.log('User connected - Username: ' + socket.username);
   });
 
+  //When a user starts typing, the code emits a 'typing' event to all connected clients except the sender.
   socket.on('typing', (data) => {
     socket.broadcast.emit('typing', data);
   });
 
+  //When a user disconnects, the code removes their username from the activeUsers set, emits a 'userDisconnected' event to all connected clients with the username of the disconnected user,
   socket.on('disconnect', () => {
     activeUsers.delete(socket.username);
     io.emit('userDisconnected', socket.username);
