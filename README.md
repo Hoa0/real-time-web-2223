@@ -1,26 +1,31 @@
-# Real-Time Web @cmda-minor-web 2022 - 2023
+# Coffee guessing game
+> “Coffee Guessing Game” is een real-time web applicatie die gebouwd is met Node.js, Socket.io en Ejs. <br>In deze game kunnen gebruikers hun kennis van koffiesoorten testen door te raden welke koffie op de afbeelding wordt weergeven. Bij elk correct antwoord krijgt de gebruiker een punt. De game bestaat uit vijf rondes en na elke ronde wordt de score van elke gebruiker bijgehouden. Verder bevat de game ook een chatfunctie waarmee gebruikers met elkaar kunnen communiceren en discussiëren.
 
 ## Demo
 
-[Bekijk link omgeving](https://rtw-2023.adaptable.app/)
+Link demo: [Coffee guessing game](https://rtw-2023.adaptable.app/)
+
+## Installaties
+
+Om dit project lokaal te gebruiken, clone dit project:
 
 ```commandline
-git clone
+git clone https://github.com/Hoa0/real-time-web-2223.git
 ```
 
-NPM, geüpdatet versies ophalen
+Om de geüpdatete versies van de gebruikte packages voor dit project op te halen, kun je NPM packages installeren:
 
 ```commandline
 npm install
 ```
 
-Project starten
+Project starten met:
 
 ```commandline
 npm start
 ```
 
-Project starten met nodemon
+Project starten met nodemon:
 
 ```commandline
 npm run dev
