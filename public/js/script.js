@@ -14,33 +14,28 @@ let username = [];
 let currentRound = 0;
 let currentScore = 0;
 
-
-// username = window.prompt("Enter your username");
-// socket.emit('newUser', username);
-// getScore.textContent = `Score: ${currentScore}`;
-
-//
+// function to start the game
+//It first prompts the user to enter their username and then emits a newUser event to the server with the username as data. 
 const startGame = () => {
-    // playerName = document.querySelector('#name').value;
-    // nameInput.style.display = 'none';
-    // gameDiv.style.display = 'block';
-    // startNewRound();
     username = window.prompt("Enter your username");
     socket.emit('newUser', username);
     startNewRound();
 }
 
+
+// Function for updates the text content of two elements round and getScore
+// increments the rounds
 const startNewRound = () => {
     currentRound++;
-    rounds.textContent = `Round ${currentRound}`;
+    rounds.textContent = `Round: ${currentRound}`;
     getScore.textContent = `Score: ${currentScore}`;
 
+    //get random coffee from the api
     socket.emit('getRandomCoffee');
 }
-startGame();
 
-///
 
+// get input value from chat input and display this 
 formMessage.addEventListener('submit', event => {
     event.preventDefault()
     if (input.value) {
@@ -49,6 +44,7 @@ formMessage.addEventListener('submit', event => {
     }
 })
 
+// add user to a list and display it
 const addUsers = (playerName) => {
     if (!!document.querySelector(`.${playerName}-userlist`)) {
         return;
@@ -59,16 +55,17 @@ const addUsers = (playerName) => {
         <span>&#9787; </span>${playerName}
     </li>`;
     onlinePlayers.innerHTML += userContainer;
-    socket.emit('getRandomCoffee');
 };
 
+//event emitted by the server and executes a callback function when the event is triggered
+//add username
 socket.on('newUser', (data) => {
     data.map((user) => addUsers(user));
     addUsers(username);
 });
 
+//If the user left the game, remove playerName
 socket.on('userDisconnected', (playerName) => {
-    // document.querySelector(`.${playerName}-userlist`).remove();
     const userContainer = document.querySelector(`.${playerName}-userlist`);
     if (userContainer) {
         userContainer.remove();
@@ -119,52 +116,50 @@ const renderCoffeeData = ({
     imgContainer.innerHTML = `<img src="${image}" alt="${title}">`;
     btnContainer.innerHTML = '';
 
-    //display coffee titles
+    //creating buttons dynamically for the multiple choice answer options
     optionsBtn.forEach((element) => {
         const button = document.createElement('button');
         button.classList.add('optionBtn');
         button.textContent = element;
 
         button.addEventListener('click', handleBtnAnswer);
-        btnContainer.appendChild(button);
+        btnContainer.appendChild(button); // add all buttons in the btnContainer
     });
 
 };
 
-// display new coffee
-// newCoffeeBtn.addEventListener('click', () => {
-//     socket.emit('getRandomCoffee');
-// });
 
+// render api data
 socket.on('coffeeData', (data) => {
     renderCoffeeData(data);
 });
 
+// handles a user's guess for the coffee name. It is triggered when the user clicks on one of the option buttons
 const handleBtnAnswer = (event) => {
     const btnSelect = event.target.textContent;
 
+    // check if the selected button is equal to the current coffee's title value and increase score
     if (btnSelect === currentCoffee.title) {
         currentScore++;
-        // alert(`Correct! The coffee is ${currentCoffee.title}`);
         socket.emit('newMessage', `Correct! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
-        // socket.emit('getRandomCoffee');
+
     } else {
-        // alert(`Wrong! The coffee is ${currentCoffee.title}`);
         socket.emit('newMessage', `Wrong! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
-        // socket.emit('getRandomCoffee');
     }
 
+    // check if the current round is less than 5 and call the function
+    // else, end the game
     if (currentRound < 5) {
         startNewRound();
-    } else{
+    } else {
         endGame();
     }
 }
 
-const endGame = () =>{
-    socket.emit('newMessage',`Game over! Your score is ${currentScore}`)
+//Function when the game has ended, it also resets the values of currentRound and currentScore to 0 in preparation for a new game.
+const endGame = () => {
+    socket.emit('newMessage', `Game over! Your score is ${currentScore}`)
     currentRound = 0;
     currentScore = 0;
 }
-// const startBtn = document.querySelector('#start-btn');
-// startBtn.addEventListener('click', startNewRound);
+startGame();

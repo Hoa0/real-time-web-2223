@@ -180,7 +180,7 @@ main>div>section:nth-of-type(2)>p:first-of-type {
 }
 
 /*container round and score */
-main>div>section:nth-of-type(2)>section{
+main>div>section:nth-of-type(2)>section {
   display: flex;
   width: 100%;
   margin-top: 1em;

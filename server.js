@@ -49,14 +49,12 @@ const getRandomCoffee = async () => {
 
 // Set up a route
 app.get('/', (req, res) => {
-  res.render('index.ejs', {
-    //pageTitle: 'Home'
-  });
+  res.render('index.ejs');
 })
 
 // Set up socket.io event handlers
 io.on('connection', (socket) => {
-  console.log('a user connected')
+  console.log('a user connected');
 
   // Get a random coffee and emit it to the client
   socket.on('getRandomCoffee', async () => {
@@ -96,7 +94,7 @@ io.on('connection', (socket) => {
       socket.emit('gameOver', countScore);
       countScore = 0;
       rounds = 0;
-     
+
     } else {
       socket.emit('result', {
         correct: correctAnswer === userAnswer,
