@@ -4,16 +4,12 @@
   box-sizing: border-box;
 }
 
-img{
-  width: 25%;
-}
-
-ul{
+ul {
   list-style: none;
 }
 
 div,
-label, h1 {
+label, ul, h1, h2, p {
   margin: 0;
   padding: 0;
 }
@@ -21,6 +17,10 @@ label, h1 {
 h1, h2 {
   font-size: 1.2rem;
   color: rgb(215, 136, 136);
+}
+
+h2 {
+  margin: 1em 0;
 }
 
 body {
@@ -44,6 +44,10 @@ main {
   align-items: center;
 }
 
+main>div {
+  display: flex;
+}
+
 section#chat {
   width: 20rem;
   height: 30rem;
@@ -55,19 +59,25 @@ section#chat {
   /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
 }
 
-/* section#listOfPeople {
+section#playerContainer {
   width: 20rem;
   background: #fffcf2;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-} */
+  margin-bottom: 0.3em;
+}
 
-ul#listOfPeople{
+ul#listOfPeople {
   overflow-x: scroll;
   height: 100%;
-  max-height: 7em;
+  max-height: 5em;
+  width: 90%;
+  margin-bottom: 1em;
+  border: 0.15em solid #ededed;
+  border-radius: 0.5em;
+  text-align: center;
 }
 
 section#chat h1 {
@@ -150,7 +160,79 @@ section#chat form>button:active {
   color: red;
 }
 
-/*list of players*/
-#listOfPeople{
-  margin-bottom: 0.3em;
+/* coffee guessing game */
+main>div>section:nth-of-type(2) {
+  width: 20rem;
+  height: auto;
+  background: #fffcf2;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 0.3em;
+}
+
+main>div>section:nth-of-type(2) p {
+  text-align: center;
+  width: 90%;
+}
+
+/* coffee image */
+#coffeeImg {
+  margin: 1em;
+  text-align: center;
+}
+
+#coffeeImg>img {
+  height: 100%;
+  max-height: 10em;
+}
+
+/* coffee buttons names container */
+#answersBtn {
+  display: inline-grid;
+  gap: 1em;
+}
+
+#answersBtn>button {
+  display: inline-block;
+  padding: 0.7em 1.7em;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 400;
+  color: #262624;
+  background-color: rgb(202 169 169);
+  border: 0em;
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17), inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+}
+
+#answersBtn>button:active {
+  box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  background-color: #9d9d9d;
+}
+
+#answersBtn>button:hover {
+  background-color: rgb(151, 113, 113);
+}
+
+/* show next coffee */
+button#showCoffee {
+  margin-top: 1.5em;
+  display: inline-block;
+  padding: 0.7em 1.7em;
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 400;
+  color: #FFFFFF;
+  background-color: rgb(215, 136, 136);
+  color:#fff;
+  border: 0em solid #fff;
+  text-align: center;
+  width: 90%;
+}
+
+button#showCoffee:hover {
+  background-color: rgb(199, 98, 98);
 }

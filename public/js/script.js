@@ -27,7 +27,7 @@ const addUsers = (playerName) => {
 
     const userContainer =
         `<li class="${playerName}-userlist">
-        ${playerName}
+        <span>&#9787; </span>${playerName}
     </li>`;
     onlinePlayers.innerHTML += userContainer;
 };
