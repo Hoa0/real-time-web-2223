@@ -1,7 +1,3 @@
-const {
-  ifError
-} = require('assert');
-// Import required modules
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
@@ -27,11 +23,11 @@ const apiUrl = 'https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/
 //Creates a new Set object to store active users.
 const activeUsers = new Set();
 
-//score
+//Declare score and rounds
 let countScore = 0;
 let rounds = 0;
 
-
+//fetch data from API
 const getRandomCoffee = async () => {
   return fetch(apiUrl)
     .then(response => response.json())
@@ -54,7 +50,6 @@ app.get('/', (req, res) => {
 
 // Set up socket.io event handlers
 io.on('connection', (socket) => {
-  console.log('a user connected');
 
   // Get a random coffee and emit it to the client
   socket.on('getRandomCoffee', async () => {
