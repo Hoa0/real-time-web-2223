@@ -20,6 +20,7 @@
   --titleColorPink: #d78988;
   --titleColorBtn: #802f2f;
 }
+
 body {
   background-color: var(--mainBg);
 }
@@ -33,15 +34,17 @@ h2 {
   padding: 1rem;
   color: var(--titleColorMain);
 }
+
 p {
   font-size: 1rem;
 }
+
 main {
   display: flex;
 }
 
 /*container with active players*/
-main > section:first-of-type {
+main>section:first-of-type {
   width: 20vw;
   height: 100vh;
   background: var(--coffeeColor);
@@ -51,12 +54,12 @@ main > section:first-of-type {
   color: var(--titleColorMain);
 }
 
-main > section:first-of-type h1 {
+main>section:first-of-type h1 {
   margin: 1em;
 }
 
 /*list of active players */
-main > section:first-of-type > ul#listOfPeople {
+main>section:first-of-type>ul#listOfPeople {
   overflow-x: scroll;
   height: 100%;
   max-height: 5em;
@@ -67,7 +70,7 @@ main > section:first-of-type > ul#listOfPeople {
 }
 
 /* Container with chat and game */
-main > section:nth-of-type(2) {
+main>section:nth-of-type(2) {
   min-height: 100vh;
   min-width: 80vw;
   display: flex;
@@ -86,6 +89,7 @@ section#coffeeGame {
   flex-direction: column;
   align-items: center;
 }
+
 section#chat {
   margin-right: 0.3em;
 }
@@ -103,7 +107,7 @@ section#chat ul {
   margin: 0.5em 0;
 }
 
-section#chat ul > li {
+section#chat ul>li {
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
   color: var(--titleColorPink);
@@ -137,7 +141,7 @@ section#chat form input[type="text"] {
 }
 
 /* chat arrow button styling */
-section#chat form > button {
+section#chat form>button {
   padding: 0 0.6rem 0 0.4rem;
   width: 2rem;
   background: rgb(239, 238, 238);
@@ -150,19 +154,19 @@ section#chat form > button {
   transition: 0.2s;
 }
 
-section#chat form > button span {
+section#chat form>button span {
   display: none;
 }
 
-section#chat form > button::after {
+section#chat form>button::after {
   content: "⇒";
 }
 
-section#chat form > button:hover {
+section#chat form>button:hover {
   padding-left: 1rem;
 }
 
-section#chat form > button:active {
+section#chat form>button:active {
   padding-left: 1rem;
   color: red;
 }
@@ -172,20 +176,21 @@ section#coffeeGame {
   color: var(--titleColorMain);
 }
 
-section#coffeeGame > h2 {
+section#coffeeGame>h2 {
   background-color: var(--coffeeColor);
   color: var(--titleColorMain);
   width: 100%;
   text-align: center;
   border-radius: 0.5rem 0.5rem 0 0;
 }
-section#coffeeGame > p:first-of-type {
+
+section#coffeeGame>p:first-of-type {
   text-align: center;
   width: 90%;
 }
 
 /* score and round container */
-section#coffeeGame > section:first-of-type {
+section#coffeeGame>section:first-of-type {
   display: flex;
   width: 100%;
   padding-bottom: 0.5rem;
@@ -195,7 +200,7 @@ section#coffeeGame > section:first-of-type {
   color: var(--titleColorMain);
 }
 
-section#coffeeGame > section:first-of-type p {
+section#coffeeGame>section:first-of-type p {
   font-size: 0.915rem;
   font-weight: bold;
 }
@@ -205,7 +210,7 @@ figure#coffeeImg {
   text-align: center;
 }
 
-figure#coffeeImg > img {
+figure#coffeeImg>img {
   height: 100%;
   max-height: 10em;
 }
@@ -217,7 +222,7 @@ section#answersBtn {
 }
 
 /*coffee buttons answers */
-section#answersBtn > button,
+section#answersBtn>button,
 button#restartButton {
   display: inline-block;
   padding: 0.7em 1.7em;
@@ -234,16 +239,26 @@ button#restartButton {
     inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
 }
 
-section#answersBtn > button:active,
+section#answersBtn>button:active,
 button#restartButton:active {
   box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15),
     inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
   background-color: #9d9d9d;
 }
 
-section#answersBtn > button:hover,
+section#answersBtn>button:hover,
 button#restartButton:hover {
   background-color: rgb(151, 113, 113);
+}
+
+p#textGameOver {
+  margin-bottom: 1em;
+  text-align: center;
+  display: grid;
+}
+
+p#textGameOver>span {
+  margin-top: 0.8rem;
 }
 
 #restartButton {

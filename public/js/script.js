@@ -9,6 +9,7 @@ const imgContainer = document.getElementById('coffeeImg');
 const btnContainer = document.getElementById('answersBtn');
 const getScore = document.getElementById('score');
 const rounds = document.getElementById('rounds');
+const textGameEnd = document.getElementById('textGameOver');
 const restartButton = document.getElementById('restartButton');
 
 let username = [];
@@ -44,7 +45,7 @@ const startNewRound = () => {
  * Event emitted by the server and executes a callback function when the event is triggered
  * Add usernames to the userlist
  */
- socket.on('newUser', (data) => {
+socket.on('newUser', (data) => {
     data.map((user) => addUsers(user));
     addUsers(username);
 });
@@ -216,7 +217,8 @@ socket.on("typing", (data) => {
  * resetting the round and score variables, clearing the answer buttons, and displaying the restart button
  */
 const endGame = () => {
-    socket.emit('newMessage', `Game over! Your score is ${currentScore}`);
+    textGameEnd.innerHTML = `Game over! <span>${username} </span> Your score is: ${currentScore} / 5`;
+    socket.emit('newMessage', `Game over! Your score is: ${currentScore}`);
     currentRound = 0;
     currentScore = 0;
     btnContainer.innerHTML = '';
@@ -236,7 +238,7 @@ restartButton.addEventListener('click', () => {
  * If the user left the game/server, remove playerName from userlist.
  * Remove username from active players
  */
- socket.on('userDisconnect', (playerName) => {
+socket.on('userDisconnect', (playerName) => {
     const userContainer = document.querySelector(`.${playerName}-userlist`);
     if (userContainer) {
         userContainer.remove();
