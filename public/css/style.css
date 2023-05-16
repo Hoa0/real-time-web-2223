@@ -2,89 +2,96 @@
 *::after,
 *::before {
   box-sizing: border-box;
-}
-
-ul {
-  list-style: none;
-}
-
-div,
-label, ul, h1, h2, p {
   margin: 0;
   padding: 0;
+  list-style: none;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
-h1, h2 {
-  font-size: 1.2rem;
-  color: rgb(215, 136, 136);
+/*********************/
+/* CUSTOM PROPERTIES */
+/*********************/
+:root {
+  --whiteColor: #fff;
+  --lightYellow: #fffcf2;
+  --mainBg: #ececec;
+  --coffeeColor: #dab88b;
+  --titleColorMain: #380505;
+  --titleColorPink: #d78988;
+  --titleColorBtn: #802f2f;
+}
+body {
+  background-color: var(--mainBg);
+}
+
+h1 {
+  font-size: 1.5rem;
 }
 
 h2 {
-  margin: 1em 0;
+  font-size: 1.15rem;
+  padding: 1rem;
+  color: var(--titleColorMain);
 }
-
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  overflow: hidden;
-  min-height: 100vh;
-  min-width: 100vw;
-  background-color: #ececec;
+p {
+  font-size: 1rem;
 }
-
 main {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-main>div {
   display: flex;
 }
 
-section#chat {
-  width: 20rem;
-  height: 30rem;
-  background: #fffcf2;
-  border-radius: 0.5rem;
+/*container with active players*/
+main > section:first-of-type {
+  width: 20vw;
+  height: 100vh;
+  background: var(--coffeeColor);
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px; */
+  color: var(--titleColorMain);
 }
 
-section#playerContainer {
-  width: 20rem;
-  background: #fffcf2;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0.3em;
+main > section:first-of-type h1 {
+  margin: 1em;
 }
 
-ul#listOfPeople {
+/*list of active players */
+main > section:first-of-type > ul#listOfPeople {
   overflow-x: scroll;
   height: 100%;
   max-height: 5em;
   width: 90%;
   margin-bottom: 1em;
-  border: 0.15em solid #ededed;
   border-radius: 0.5em;
   text-align: center;
 }
 
-section#chat h1 {
-  padding-top: 1rem;
-  font-size: 1rem;
+/* Container with chat and game */
+main > section:nth-of-type(2) {
+  min-height: 100vh;
+  min-width: 80vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* chat and game container styling */
+section#chat,
+section#coffeeGame {
+  width: 20rem;
+  height: 35rem;
+  background: #fffcf2;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+section#chat {
+  margin-right: 0.3em;
+}
+
+/* chat styling */
+/* chat message styling */
 section#chat ul {
   margin: 0 !important;
   padding: 0.2em;
@@ -96,19 +103,16 @@ section#chat ul {
   margin: 0.5em 0;
 }
 
-::-webkit-scrollbar {
-  background: transparent;
-}
-
-section#chat ul>li {
+section#chat ul > li {
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
-  color: rgb(215, 136, 136);
+  color: var(--titleColorPink);
   background-color: #f0f0f0;
   margin: 0.2em;
   border-radius: 0.3em;
 }
 
+/* chat input styling */
 section#chat form {
   margin: 0 0 1rem 0;
   padding: 0;
@@ -117,7 +121,7 @@ section#chat form {
   display: flex;
 }
 
-section#chat form input[type='text'] {
+section#chat form input[type="text"] {
   margin: 0;
   padding: 0 1rem;
   border: none;
@@ -132,7 +136,8 @@ section#chat form input[type='text'] {
   outline: none;
 }
 
-section#chat form>button {
+/* chat arrow button styling */
+section#chat form > button {
   padding: 0 0.6rem 0 0.4rem;
   width: 2rem;
   background: rgb(239, 238, 238);
@@ -145,104 +150,95 @@ section#chat form>button {
   transition: 0.2s;
 }
 
-section#chat form>button span {
+section#chat form > button span {
   display: none;
 }
 
-section#chat form>button::after {
-  content: '⇒';
+section#chat form > button::after {
+  content: "⇒";
 }
 
-section#chat form>button:hover {
+section#chat form > button:hover {
   padding-left: 1rem;
 }
 
-section#chat form>button:active {
+section#chat form > button:active {
   padding-left: 1rem;
   color: red;
 }
 
-/* coffee guessing game */
-main>div>section:nth-of-type(2) {
-  width: 20rem;
-  height: auto;
-  background: #fffcf2;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 0.3em;
+/* Game */
+section#coffeeGame {
+  color: var(--titleColorMain);
 }
 
-main>div>section:nth-of-type(2)>p:first-of-type {
+section#coffeeGame > h2 {
+  background-color: var(--coffeeColor);
+  color: var(--titleColorMain);
+  width: 100%;
+  text-align: center;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+section#coffeeGame > p:first-of-type {
   text-align: center;
   width: 90%;
 }
 
-/*container round and score */
-main>div>section:nth-of-type(2)>section {
+/* score and round container */
+section#coffeeGame > section:first-of-type {
   display: flex;
   width: 100%;
-  margin-top: 1em;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
   justify-content: space-evenly;
+  background-color: var(--coffeeColor);
+  color: var(--titleColorMain);
 }
 
-/* coffee image */
-#coffeeImg {
+section#coffeeGame > section:first-of-type p {
+  font-size: 0.915rem;
+  font-weight: bold;
+}
+
+figure#coffeeImg {
   margin: 1em;
   text-align: center;
 }
 
-#coffeeImg>img {
+figure#coffeeImg > img {
   height: 100%;
   max-height: 10em;
 }
 
 /* coffee buttons names container */
-#answersBtn {
+section#answersBtn {
   display: inline-grid;
   gap: 1em;
 }
 
-#answersBtn>button {
+/*coffee buttons answers */
+section#answersBtn > button {
   display: inline-block;
   padding: 0.7em 1.7em;
   border-radius: 0.5em;
   box-sizing: border-box;
   text-decoration: none;
   font-weight: 400;
-  color: #262624;
-  background-color: rgb(202 169 169);
+  color: var(--titleColorBtn);
+  font-weight: normal;
+  background: var(--coffeeColor);
   border: 0em;
-  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17), inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
+    inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
 }
 
-#answersBtn>button:active {
-  box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+section#answersBtn > button:active {
+  box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15),
+    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
   background-color: #9d9d9d;
 }
 
-#answersBtn>button:hover {
+section#answersBtn > button:hover {
   background-color: rgb(151, 113, 113);
-}
-
-/* show next coffee */
-button#showCoffee {
-  margin-top: 1.5em;
-  display: inline-block;
-  padding: 0.7em 1.7em;
-  border-radius: 0.5em;
-  box-sizing: border-box;
-  text-decoration: none;
-  font-weight: 400;
-  color: #FFFFFF;
-  background-color: rgb(215, 136, 136);
-  color: #fff;
-  border: 0em solid #fff;
-  text-align: center;
-  width: 90%;
-}
-
-button#showCoffee:hover {
-  background-color: rgb(199, 98, 98);
 }

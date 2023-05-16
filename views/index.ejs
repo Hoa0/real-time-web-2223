@@ -1,32 +1,43 @@
 <%- include('partials/head'); %>
-    <div>
-        <section>
-            <!-- A list of online players -->
-            <section id="playerContainer">
-                <h2>Active players</h2>
-                <ul id="listOfPeople"></ul>
-            </section>
-            <!-- A simple chat - RTW -->
-            <section id="chat">
-                <h1>Anonieme chat</h1>
-                <ul></ul>
-                <div class="fallback"></div>
-                <form id="formChat">
-                    <input id="inputChat" type="text" autocomplete="off" placeholder="Type a message">
-                    <button><span>Send</span></button>
-                </form>
-            </section>
+    <section>
+        <!-- <h1><span>░█████╗░░█████╗░███████╗███████╗███████╗███████╗
+                ██╔══██╗██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝
+                ██║░░╚═╝██║░░██║█████╗░░█████╗░░█████╗░░█████╗░░
+                ██║░░██╗██║░░██║██╔══╝░░██╔══╝░░██╔══╝░░██╔══╝░░
+                ╚█████╔╝╚█████╔╝██║░░░░░██║░░░░░███████╗███████╗
+                ░╚════╝░░╚════╝░╚═╝░░░░░╚═╝░░░░░╚══════╝╚══════╝</span> ☕ guessing game</h1> -->
+        <h1>ℂ𝕠𝕗𝕗𝕖𝕖 𝕘𝕦𝕖𝕤𝕤𝕚𝕟𝕘 𝕘𝕒𝕞𝕖 ☕</h1>
+        <h2>Active players</h2>
+        <ul id="listOfPeople"></ul>
+    </section>
+
+    <section>
+        <!-- Chat -->
+        <section id="chat">
+            <h2>Anonieme chat</h2>
+            <ul></ul>
+            <span class="fallback"></span>
+            <form id="formChat">
+                <input id="inputChat" type="text" autocomplete="off" placeholder="Type a message">
+                <button><span>Send</span></button>
+            </form>
         </section>
+
         <!-- Coffee guessing game -->
-        <section>
+        <section id="coffeeGame">
             <h2>Guess the Coffee</h2>
+            <section>
+                <p id="rounds"></p>
+                <p id="score"></p>
+            </section>
             <p>Look at the image below and select the correct coffee name:</p>
             <section>
                 <p id="rounds"></p>
                 <p id="score"></p>
             </section>
-            <div id="coffeeImg"></div>
-            <div id="answersBtn"></div>
+            <figure id="coffeeImg"></figure>
+            <section id="answersBtn"></section>
         </section>
-    </div>
+    </section>
     <%- include('partials/footer'); %>
+        <!--- source: symbol https://fsymbols.com/ -->
