@@ -1,7 +1,8 @@
 let socket = io();
 let messages = document.querySelector('section#chat ul');
-const formMessage = document.getElementById('formChat');
 let input = document.querySelector('#inputChat');
+
+const formMessage = document.getElementById('formChat');
 const fallback = document.querySelector(".fallback");
 const onlinePlayers = document.querySelector('#listOfPeople');
 const imgContainer = document.getElementById('coffeeImg');
@@ -14,8 +15,11 @@ let username = [];
 let currentRound = 0;
 let currentScore = 0;
 
-// Function to start the game
-//First prompts the user to enter their username and then emits a newUser event to the server with the username as data. 
+/**
+ * Function to start the game
+ * First, the program prompts the user to enter their username
+ * and emits a newUser event to the server with the username as the data. 
+ */
 const startGame = () => {
     username = window.prompt("Enter your username");
     socket.emit('newUser', username);
@@ -23,27 +27,34 @@ const startGame = () => {
     startNewRound();
 }
 
-// Function for updates the text content of two elements round and getScore
-// It also increments the rounds
+/**
+ * Function for updating the round and score and display it.
+ * Also increments the currentRound
+ */
 const startNewRound = () => {
     currentRound++;
     rounds.textContent = `Round: ${currentRound}`;
     getScore.textContent = `Score: ${currentScore}`;
 
-    //get random coffee from the api
+    //Trigger the server to retrieve a random coffee from the API
     socket.emit('getRandomCoffee');
 }
 
-// Get input value from the chat input and display it 
-formMessage.addEventListener('submit', event => {
-    event.preventDefault()
-    if (input.value) {
-        socket.emit('newMessage', input.value)
-        input.value = ''
-    }
-})
+/**
+ * Event emitted by the server and executes a callback function when the event is triggered
+ * Add usernames to the userlist
+ */
+ socket.on('newUser', (data) => {
+    data.map((user) => addUsers(user));
+    addUsers(username);
+});
 
-// Add user to the list and display it
+/**
+ * Function for adding users to a user list and display it.
+ * The function checks if there is already an element with a class name: parameter
+ * @param {playerName} string 
+ * @returns 
+ */
 const addUsers = (playerName) => {
     if (!!document.querySelector(`.${playerName}-userlist`)) {
         return;
@@ -56,65 +67,18 @@ const addUsers = (playerName) => {
     onlinePlayers.innerHTML += userContainer;
 };
 
-//Event emitted by the server and executes a callback function when the event is triggered
-//Add username
-socket.on('newUser', (data) => {
-    data.map((user) => addUsers(user));
-    addUsers(username);
+/**
+ * 'CoffeeData' event, get coffee API from the server.
+ * Render function renderCoffeeData
+ */
+socket.on('coffeeData', (data) => {
+    renderCoffeeData(data);
 });
 
-//If the user left the game, remove playerName
-socket.on('userDisconnected', (playerName) => {
-    const userContainer = document.querySelector(`.${playerName}-userlist`);
-    if (userContainer) {
-        userContainer.remove();
-    }
-});
-
-// Show message
-socket.on('newMessage', (message) => {
-    addMessage(message);
-})
-
-// Show message history
-socket.on('history', (history) => {
-    history.forEach((message) => {
-        addMessage(message);
-    })
-});
-
-// Add message
-function addMessage(message) {
-    messages.appendChild(Object.assign(document.createElement('li'), {
-        textContent: message.user + ' : ' + message.message
-    }))
-    messages.scrollTop = messages.scrollHeight
-}
-
-// Typing
-input.addEventListener("keyup", () => {
-    socket.emit("typing", {
-        isTyping: input.value.length > 0,
-        username,
-    });
-});
-
-// User is typing
-socket.on("typing", (data) => {
-    const {
-        isTyping,
-        username
-    } = data;
-
-    if (!isTyping) {
-        fallback.innerHTML = "";
-        return;
-    }
-
-    fallback.innerHTML = `<p>${username} is typing...</p>`;
-});
-
-//Display coffee api
+/**
+ * Display Coffee image, title and answer buttons
+ * @param {title, image, optionsBtn} string 
+ */
 const renderCoffeeData = ({
     title,
     image,
@@ -139,13 +103,12 @@ const renderCoffeeData = ({
 
 };
 
-
-// Render api data
-socket.on('coffeeData', (data) => {
-    renderCoffeeData(data);
-});
-
-// Handle a user's guess for the coffee name. It is triggered when the user clicks on one of the option buttons
+/**
+ * The function handles the user's selection of an answer button by comparing the selected answer with the correct coffee title.
+ * @param {event} string 
+ * The function retrieves the text content of the button that triggered the event using event.target.textContent. 
+ * It assigns this value to the variable btnSelect, representing the selected answer.
+ */
 const handleBtnAnswer = (event) => {
     const btnSelect = event.target.textContent;
 
@@ -158,27 +121,113 @@ const handleBtnAnswer = (event) => {
         socket.emit('newMessage', `Wrong! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
     }
 
-    // Check if the current round is less than 5 and call the function
-    // Otherwise, end the game
+    /**
+     * Check if the current round is less than 5 and call the function
+     * Otherwise, end the game
+     */
     if (currentRound < 5) {
         startNewRound();
     } else {
         endGame();
     }
-}
+};
 
-restartButton.addEventListener('click', () => {
-    restartButton.style.display = 'none';
-    startNewRound();
+/**
+ * Chat RTW
+ * Event is received from the server
+ * Show message to client
+ */
+socket.on('newMessage', (message) => {
+    addMessage(message);
 });
 
-//Function when the game has ended, it also resets the values of currentRound and currentScore to 0 in preparation for a new game.
+// Show message history
+socket.on('history', (history) => {
+    history.forEach((message) => {
+        addMessage(message);
+    })
+});
+
+/**
+ * Chat RTW
+ * Function to create new 'li' element and sets textContent with username + input chat message.
+ * Add to messages element
+ * @param {message} string 
+ */
+function addMessage(message) {
+    messages.appendChild(Object.assign(document.createElement('li'), {
+        textContent: message.user + ' : ' + message.message
+    }))
+    //scrolled to the bottom to display the new message
+    messages.scrollTop = messages.scrollHeight
+}
+
+/**
+ * Chat RTW
+ * When user is typing
+ * Emits a 'typing' event to the server, 
+ * indicating whether the user is currently typing and providing the username of the user.
+ */
+input.addEventListener("keyup", () => {
+    socket.emit("typing", {
+        isTyping: input.value.length > 0,
+        username,
+    });
+});
+
+/**
+ * Chat RTW
+ * when the "typing" event is received from the server, the code updates the content of 
+ * the fallback element based on the isTyping value. If the user is typing, it displays 
+ * a message indicating the username of the user who is currently typing. 
+ * If the user is not typing, it clears the content of the fallback element.
+ */
+socket.on("typing", (data) => {
+    const {
+        isTyping,
+        username
+    } = data;
+
+    if (!isTyping) {
+        fallback.innerHTML = "";
+        return;
+    }
+
+    fallback.innerHTML = `<p>${username} is typing...</p>`;
+});
+//
+
+/**
+ * The function handles the finalization of the game by emitting a message to the server, 
+ * resetting the round and score variables, clearing the answer buttons, and displaying the restart button
+ */
 const endGame = () => {
     socket.emit('newMessage', `Game over! Your score is ${currentScore}`);
     currentRound = 0;
     currentScore = 0;
     btnContainer.innerHTML = '';
     restartButton.style.display = 'block';
-}
+};
 
+/**
+ * when the restart button is clicked, the code hides the button from the webpage and 
+ * starts a new round of the game by calling the startNewRound() function.
+ */
+restartButton.addEventListener('click', () => {
+    restartButton.style.display = 'none';
+    startNewRound();
+});
+
+/**
+ * If the user left the game/server, remove playerName from userlist.
+ * Remove username from active players
+ */
+ socket.on('userDisconnect', (playerName) => {
+    const userContainer = document.querySelector(`.${playerName}-userlist`);
+    if (userContainer) {
+        userContainer.remove();
+    }
+});
+
+// call function to start the game
 startGame();

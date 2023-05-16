@@ -137,7 +137,7 @@ io.on('connection', (socket) => {
   //When a user disconnects, the code removes their username from the activeUsers set, emits a 'userDisconnected' event to all connected clients with the username of the disconnected user,
   socket.on('disconnect', () => {
     activeUsers.delete(socket.username);
-    io.emit('userDisconnected', socket.username);
+    io.emit('userDisconnect', socket.username);
     console.log('user disconnected', socket.username);
   })
 })
