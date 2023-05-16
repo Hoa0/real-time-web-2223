@@ -116,7 +116,7 @@ io.on('connection', (socket) => {
     io.emit('newMessage', {
       message,
       user: socket.username,
-      hist: [...messageChat]
+      historyList: [...messageChat]
     });
 
   });
