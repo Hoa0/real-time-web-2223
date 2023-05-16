@@ -149,6 +149,20 @@ socket.on('history', (history) => {
 });
 
 /**
+ * When the user submits the form by pressing enter or clicking a submit button, 
+ * the code checks if the input field contains a message. 
+ * If a message is present, it emits a 'newMessage' event to the server with 
+ * the message content and clears the input field.
+ */
+formMessage.addEventListener('submit', event => {
+    event.preventDefault()
+    if (input.value) {
+        socket.emit('newMessage', input.value)
+        input.value = ''
+    }
+});
+
+/**
  * Chat RTW
  * Function to create new 'li' element and sets textContent with username + input chat message.
  * Add to messages element
