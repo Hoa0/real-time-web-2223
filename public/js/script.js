@@ -8,6 +8,7 @@ const imgContainer = document.getElementById('coffeeImg');
 const btnContainer = document.getElementById('answersBtn');
 const getScore = document.getElementById('score');
 const rounds = document.getElementById('rounds');
+const restartButton = document.getElementById('restartButton');
 
 let username = [];
 let currentRound = 0;
@@ -18,9 +19,9 @@ let currentScore = 0;
 const startGame = () => {
     username = window.prompt("Enter your username");
     socket.emit('newUser', username);
+    restartButton.style.display = 'none';
     startNewRound();
 }
-
 
 // Function for updates the text content of two elements round and getScore
 // It also increments the rounds
@@ -166,11 +167,18 @@ const handleBtnAnswer = (event) => {
     }
 }
 
+restartButton.addEventListener('click', () => {
+    restartButton.style.display = 'none';
+    startNewRound();
+});
+
 //Function when the game has ended, it also resets the values of currentRound and currentScore to 0 in preparation for a new game.
 const endGame = () => {
-    socket.emit('newMessage', `Game over! Your score is ${currentScore}`)
+    socket.emit('newMessage', `Game over! Your score is ${currentScore}`);
     currentRound = 0;
     currentScore = 0;
+    btnContainer.innerHTML = '';
+    restartButton.style.display = 'block';
 }
 
 startGame();
