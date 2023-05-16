@@ -73,12 +73,28 @@ socket.on('userDisconnected', (playerName) => {
 });
 
 // add message
-socket.on('sendMessage', (message) => {
+socket.on('newMessage', (message) => {
+    // messages.appendChild(Object.assign(document.createElement('li'), {
+    //     textContent: message.user + ' : ' + message.message
+    // }))
+    // messages.scrollTop = messages.scrollHeight
+    addMessage(message);
+})
+
+//message history
+socket.on('history', (history) => {
+    history.forEach((message) => {
+        addMessage(message);
+        // socket.emit('newMessage', message)
+    })
+});
+
+function addMessage(message) {
     messages.appendChild(Object.assign(document.createElement('li'), {
         textContent: message.user + ' : ' + message.message
     }))
     messages.scrollTop = messages.scrollHeight
-})
+}
 
 // typing
 input.addEventListener("keyup", () => {

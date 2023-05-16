@@ -22,10 +22,13 @@ const apiUrl = 'https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/
 
 //Creates a new Set object to store active users.
 const activeUsers = new Set();
+const messageChat = new Set();
 
-//Declare score and rounds
+//Declare: history, score and rounds
 let countScore = 0;
 let rounds = 0;
+const historySize = 50;
+let history = [];
 
 //fetch data from API
 const getRandomCoffee = async () => {
@@ -50,6 +53,8 @@ app.get('/', (req, res) => {
 
 // Set up socket.io event handlers
 io.on('connection', (socket) => {
+
+  socket.emit('history', history);
 
   // Get a random coffee and emit it to the client
   socket.on('getRandomCoffee', async () => {
@@ -102,12 +107,19 @@ io.on('connection', (socket) => {
   //When a user sends a message, the code emits a 'sendMessage' event to all connected clients with the message content and the username of the sender.
   socket.on('newMessage', (message) => {
 
-    io.emit('sendMessage', {
-      message: message,
-      user: socket.username
+    while (history.length > historySize) {
+      history.shift()
+    }// add history messages
+    history.push({ message, user: socket.username });
+
+
+    io.emit('newMessage', {
+      message,
+      user: socket.username,
+      hist: [...messageChat]
     });
 
-  })
+  });
 
   //emits a 'newUser' event to all connected clients with a list of active users.
   socket.on('newUser', (user) => {
