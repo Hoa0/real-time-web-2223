@@ -36,7 +36,7 @@ const startNewRound = () => {
     currentRound++;
     rounds.textContent = `Round: ${currentRound}`;
     getScore.textContent = `Score: ${currentScore}`;
-
+    textGameEnd.innerHTML =``;
     //Trigger the server to retrieve a random coffee from the API
     socket.emit('getRandomCoffee');
 }
