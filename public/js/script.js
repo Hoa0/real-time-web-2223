@@ -6,7 +6,6 @@ const fallback = document.querySelector(".fallback");
 const onlinePlayers = document.querySelector('#listOfPeople');
 const imgContainer = document.getElementById('coffeeImg');
 const btnContainer = document.getElementById('answersBtn');
-const newCoffeeBtn = document.getElementById('showCoffee');
 const getScore = document.getElementById('score');
 const rounds = document.getElementById('rounds');
 
@@ -14,8 +13,8 @@ let username = [];
 let currentRound = 0;
 let currentScore = 0;
 
-// function to start the game
-//It first prompts the user to enter their username and then emits a newUser event to the server with the username as data. 
+// Function to start the game
+//First prompts the user to enter their username and then emits a newUser event to the server with the username as data. 
 const startGame = () => {
     username = window.prompt("Enter your username");
     socket.emit('newUser', username);
@@ -24,7 +23,7 @@ const startGame = () => {
 
 
 // Function for updates the text content of two elements round and getScore
-// increments the rounds
+// It also increments the rounds
 const startNewRound = () => {
     currentRound++;
     rounds.textContent = `Round: ${currentRound}`;
@@ -34,8 +33,7 @@ const startNewRound = () => {
     socket.emit('getRandomCoffee');
 }
 
-
-// get input value from chat input and display this 
+// Get input value from the chat input and display it 
 formMessage.addEventListener('submit', event => {
     event.preventDefault()
     if (input.value) {
@@ -44,7 +42,7 @@ formMessage.addEventListener('submit', event => {
     }
 })
 
-// add user to a list and display it
+// Add user to the list and display it
 const addUsers = (playerName) => {
     if (!!document.querySelector(`.${playerName}-userlist`)) {
         return;
@@ -57,8 +55,8 @@ const addUsers = (playerName) => {
     onlinePlayers.innerHTML += userContainer;
 };
 
-//event emitted by the server and executes a callback function when the event is triggered
-//add username
+//Event emitted by the server and executes a callback function when the event is triggered
+//Add username
 socket.on('newUser', (data) => {
     data.map((user) => addUsers(user));
     addUsers(username);
@@ -72,19 +70,19 @@ socket.on('userDisconnected', (playerName) => {
     }
 });
 
-// show message
+// Show message
 socket.on('newMessage', (message) => {
     addMessage(message);
 })
 
-// show message history
+// Show message history
 socket.on('history', (history) => {
     history.forEach((message) => {
         addMessage(message);
     })
 });
 
-// add message
+// Add message
 function addMessage(message) {
     messages.appendChild(Object.assign(document.createElement('li'), {
         textContent: message.user + ' : ' + message.message
@@ -92,7 +90,7 @@ function addMessage(message) {
     messages.scrollTop = messages.scrollHeight
 }
 
-// typing
+// Typing
 input.addEventListener("keyup", () => {
     socket.emit("typing", {
         isTyping: input.value.length > 0,
@@ -100,7 +98,7 @@ input.addEventListener("keyup", () => {
     });
 });
 
-// user is typing
+// User is typing
 socket.on("typing", (data) => {
     const {
         isTyping,
@@ -128,25 +126,25 @@ const renderCoffeeData = ({
     imgContainer.innerHTML = `<img src="${image}" alt="${title}">`;
     btnContainer.innerHTML = '';
 
-    //creating buttons dynamically for the multiple choice answer options
+    //Create buttons dynamically for the multiple choice answer options
     optionsBtn.forEach((element) => {
         const button = document.createElement('button');
         button.classList.add('optionBtn');
         button.textContent = element;
 
         button.addEventListener('click', handleBtnAnswer);
-        btnContainer.appendChild(button); // add all buttons in the btnContainer
+        btnContainer.appendChild(button); // Add all buttons to the btnContainer
     });
 
 };
 
 
-// render api data
+// Render api data
 socket.on('coffeeData', (data) => {
     renderCoffeeData(data);
 });
 
-// handles a user's guess for the coffee name. It is triggered when the user clicks on one of the option buttons
+// Handle a user's guess for the coffee name. It is triggered when the user clicks on one of the option buttons
 const handleBtnAnswer = (event) => {
     const btnSelect = event.target.textContent;
 
@@ -159,8 +157,8 @@ const handleBtnAnswer = (event) => {
         socket.emit('newMessage', `Wrong! The coffee is: ${currentCoffee.title}`, currentCoffee.title.value)
     }
 
-    // check if the current round is less than 5 and call the function
-    // else, end the game
+    // Check if the current round is less than 5 and call the function
+    // Otherwise, end the game
     if (currentRound < 5) {
         startNewRound();
     } else {
@@ -174,4 +172,5 @@ const endGame = () => {
     currentRound = 0;
     currentScore = 0;
 }
+
 startGame();

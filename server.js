@@ -27,7 +27,7 @@ const messageChat = new Set();
 //Declare: history, score and rounds
 let countScore = 0;
 let rounds = 0;
-const historySize = 50;
+const historySize = 5;
 let history = [];
 
 //fetch data from API
