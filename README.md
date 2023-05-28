@@ -1,23 +1,28 @@
 # Coffee guessing game
+
 > “Coffee Guessing Game” is een real-time web applicatie die gebouwd is met Node.js, Socket.io en Ejs. <br>In deze game kunnen gebruikers hun kennis van koffiesoorten testen door te raden welke koffie op de afbeelding wordt weergeven. Bij elk correct antwoord krijgt de gebruiker een punt. De game bestaat uit vijf rondes en na elke ronde wordt de score van elke gebruiker bijgehouden. Verder bevat de game ook een chatfunctie waarmee gebruikers met elkaar kunnen communiceren en discussiëren.
 
 ## Demo
 
 Link demo: [Coffee guessing game](https://rtw-2023.adaptable.app/)
 
+> Gehost via: [adaptable](https://adaptable.io)
+
 ## Installaties
 
-Om dit project lokaal te gebruiken, clone dit project:
+Stap 1: Om dit project lokaal te gebruiken, clone dit project:
 
 ```commandline
 git clone https://github.com/Hoa0/real-time-web-2223.git
 ```
 
-Om de geüpdatete versies van de gebruikte packages voor dit project op te halen, kun je NPM packages installeren:
+Stap 2: Om de geüpdatete versies van de gebruikte packages voor dit project op te halen, installeer NPM packages:
 
 ```commandline
 npm install
 ```
+
+Stap 3:
 
 Project starten met:
 
@@ -30,6 +35,76 @@ Project starten met nodemon:
 ```commandline
 npm run dev
 ```
+
+## Proof of concept
+
+### Concept 1:
+
+api: MovieMet de API van [themoviedb](https://developer.themoviedb.org/docs). Verschillende feiten weergeven van acteurs, waarbij je als gebruiker kunt aangeven of de feiten waar of niet waar zijn. Antwoorden kunnen via de chatfunctie opgegeven worden en de gebruiker krijgt gelijk feedback te zien, of zijn antwoord correct is.
+
+#### Functionaliteiten
+
+- Gebruikersnaam invullen
+- Communiceren met andere tegenstanders via de chat
+- Feedback ontvangen van je antwoorden
+- Je kan zien hoeveel gebruikers er online zijn
+- Data uit de API halen en dit weergeven (namen van acteurs en feiten)
+
+### Concept 2:
+
+Met de API van [dog-api](https://dog.ceo/dog-api/). Afbeeldingen van honden weergeven, waarbij gebruikers de mogelijkheid hebben om het ras van de hond te raden. Met behulp van de API worden willekeurige afbeeldingen van verschillende hondenrassen opgehaald en aan de gebruikers gepresenteerd. Helaas staat er in deze api geen hondenras type, waardoor ik het niet kan gebruiken. Tenzij ik het zelf ga implementeren.
+
+### Concept 3:
+
+Met de API van [coffee-api](https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json) kunnen gebruikers koffie soorten raden. Met behulp van de API worden willekeurige afbeeldingen en de titel van de koffie opgehaald en dit weergeven. Zodra de gebruiker een antwoord heeft gekozen, ontvangen ze gelijk feedback via de chat. Bij een correct antwoord, krijg je een punt.
+
+#### Functionaliteiten
+
+- Gebruikersnaam invullen
+- Communiceren met andere tegenstanders via de chat
+- Feedback ontvangen van je antwoorden
+- Je kan zien hoeveel gebruikers er online zijn
+- Data uit de API halen en dit weergeven (Afbeeldingen url, koffie titels)
+- Score bijhouden
+- Aantal rondes bijhouden
+
+### Gekozen concept:
+
+Concept 3: koffie API
+
+#### Job story
+
+- Als gebruiker wil ik kunnen deelnemen aan een koffiequiz, waarbij ik verschillende koffiesoorten kan raden op basis van een koffie afbeelding. Na het invoeren van mijn antwoord wil ik direct feedback ontvangen om te weten of mijn antwoord correct was of niet.
+
+- Als gebruiker wil ik bij een koffiequiz de mogelijkheid hebben om mijn score te kunnen zien van hoeveel antwoorden ik correct heb geraden, zodat ik mijn voortgang kan volgen en dit kan verbeteren.
+
+- Als gebruiker wil ik communiceren met andere gebruikers, zodat ik met hen kan discussiëren over deze game. Daarnaast wil ik kunnen zien wie er online zijn, zodat ik weet met wie ik direct interactie kan hebben.
+
+## Functionaliteiten
+
+[X] Gebruikersnaam opgeven
+[X] Communiceren via chat
+[X] Zien wie er aan het typen is
+[X] Feedback ontvangen van je antwoorden
+[X] Score en aantal rondes worden bijgehouden
+[x] Koffie afbeeldingen en titel gegevens worden uit de API gehaald
+
+## Gebruikte technologiën
+
+- HTML, CSS & JavaScript
+- EJS
+- Node.js
+- NPM
+- Express
+- Socket.io
+
+## Data-lifecycle Model
+
+## API
+
+## MoSCoW
+
+## Real-Time Events
 
 Week 1 bronnen
 
