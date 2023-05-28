@@ -102,6 +102,10 @@ Concept 3: koffie API
 
 ## API
 
+Voor dit project heb ik gebruikt gemaakt van de [coffee-api](https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json)
+
+Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk gevonden op de website van [sampleapis](https://sampleapis.com/) en dit is de [originele api link](https://sampleapis.com/api-list/coffee). Na twee weken werden de data van deze api aangepast, waardoor ik alleen maar ‘test test test’ data kreeg te zien. Vervolgens heb ik op de github van [sampleapis - github](https://github.com/jermbo/SampleAPIs) gekeken en vond ik de juiste en volledige json data van de koffie API. Deze link heb ik gebruikt voor dit project, ook heb ik met Shyanta besproken of dit mogelijk was om die linkt gebruiken van github en dat was geen probleem.
+
 ## MoSCoW
 
 ## Real-Time Events
