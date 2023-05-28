@@ -82,12 +82,12 @@ Concept 3: koffie API
 
 ## Functionaliteiten
 
-[X] Gebruikersnaam opgeven
-[X] Communiceren via chat
-[X] Zien wie er aan het typen is
-[X] Feedback ontvangen van je antwoorden
-[X] Score en aantal rondes worden bijgehouden
-[x] Koffie afbeeldingen en titel gegevens worden uit de API gehaald
+- [X] Gebruikersnaam opgeven
+- [X] Communiceren via chat
+- [X] Zien wie er aan het typen is
+- [X] Feedback ontvangen van je antwoorden
+- [X] Score en aantal rondes worden bijgehouden
+- [X] Koffie afbeeldingen en titel gegevens worden uit de API gehaald
 
 ## Gebruikte technologiën
 
@@ -104,7 +104,7 @@ Concept 3: koffie API
 
 Voor dit project heb ik gebruikt gemaakt van de [coffee-api](https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json)
 
-Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk gevonden op de website van [sampleapis](https://sampleapis.com/) en dit is de [originele api link](https://sampleapis.com/api-list/coffee). Na twee weken werden de data van deze api aangepast, waardoor ik alleen maar ‘test test test’ data kreeg te zien. Vervolgens heb ik op de github van [sampleapis - github](https://github.com/jermbo/SampleAPIs) gekeken en vond ik de juiste en volledige json data van de koffie API. Deze link heb ik gebruikt voor dit project, ook heb ik met Shyanta besproken of dit mogelijk was om die linkt gebruiken van github en dat was geen probleem.
+Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk gevonden op de website van [sampleapis](https://sampleapis.com/) en dit is de [originele api link](https://sampleapis.com/api-list/coffee). Na twee weken werden de data van deze api aangepast, waardoor ik alleen maar ‘test test test’ data kreeg te zien. Vervolgens heb ik op de github van [sampleapis - github](https://github.com/jermbo/SampleAPIs) gekeken en vond ik de juiste en volledige json data van de koffie API. Deze link heb ik gebruikt voor dit project, ook heb ik met Shyanta besproken of dit mogelijk was om deze linkt te gebruiken van github en dat was geen probleem.
 
 ## MoSCoW
 
