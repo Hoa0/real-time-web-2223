@@ -8,11 +8,17 @@ Link demo: [Coffee guessing game](https://rtw-2023.adaptable.app/)
 
 > Gehost via: [adaptable](https://adaptable.io)
 
-<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-1.png" width="200">
+#### Gebruikersnaam invullen
 
-<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-2.png" width="200">
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-1.png" width="300">
 
-<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-3.png" width="200">
+#### Het begin scherm
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-2.png" width="400">
+
+#### Game einde
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-3.png" width="400">
 
 ## Installaties
 
@@ -329,7 +335,9 @@ Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk
 
 <img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/DataLifecycleDiagram.jpg" width="400">
 
-https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1
+[Bekijk in figma: Data-lifecycle Model](https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1)
+
+Dit 'Data-lifecycle Model' bestaat uit vier compontenten: De gebruiker, client, server en API. De gebruiker, verstuurt zijn gebruikersnaam, kan berichten versturen, antwoord opgeven wat voor soort koffie het is en de game restarten na vijf rondes. In de client worden de gebruikersnaam gecreeerd en in de server opgeslagen, via de server wordt het naar alle verbonden cleint gestuurd. Bij het raden van een koffie, wordt er gecheckt naar de button tekst ` const btnSelect = event.target.textContent;` in de client die vervolgens naar de server stuurd. In de server wordt er gekeken of het antwoord klopt en stuurd het via de client weer terug wat het antwoord moest zijn (feedback) en houdt ook de rondes en score bij.
 
 ## MoSCoW
 
@@ -360,6 +368,8 @@ https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&
 - Verschillende chatrooms voor "hot" of "cold" koffie expert
 
 ## Real-Time Events
+
+-
 
 Week 1 bronnen
 
