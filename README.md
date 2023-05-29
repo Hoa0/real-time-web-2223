@@ -98,10 +98,6 @@ Concept 3: koffie API
 - Express
 - Socket.io
 
-## Data-lifecycle Model
-
-https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1
-
 ## API
 
 Voor dit project heb ik gebruikt gemaakt van de [coffee-api](https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json)
@@ -316,6 +312,12 @@ Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk
 ```
 
 </details>
+
+## Data-modeling
+
+## Data-lifecycle Model
+
+https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1
 
 ## MoSCoW
 
