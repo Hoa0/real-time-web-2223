@@ -8,6 +8,12 @@ Link demo: [Coffee guessing game](https://rtw-2023.adaptable.app/)
 
 > Gehost via: [adaptable](https://adaptable.io)
 
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-1.png" width="200">
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-2.png" width="200">
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-3.png" width="200">
+
 ## Installaties
 
 Stap 1: Om dit project lokaal te gebruiken, clone dit project:
@@ -88,6 +94,8 @@ Concept 3: koffie API
 - [x] Feedback ontvangen van je antwoorden
 - [x] Score en aantal rondes worden bijgehouden
 - [x] Koffie afbeeldingen en titel gegevens worden uit de API gehaald
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-schets.png" width="400">
 
 ## Gebruikte technologiën
 
@@ -315,7 +323,11 @@ Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk
 
 ## Data-modeling
 
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/data-modeling.png" width="200">
+
 ## Data-lifecycle Model
+
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/DataLifecycleDiagram.jpg" width="400">
 
 https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1
 
