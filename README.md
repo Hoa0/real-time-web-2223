@@ -10,9 +10,9 @@ Link demo: [Coffee guessing game](https://rtw-2023.adaptable.app/)
 
 <img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-1.png" width="200">
 
-<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-2.png" width="200">
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-2.png" width="200">
 
-<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/RTW-coffee-3.png" width="200">
+<img src="https://github.com/Hoa0/real-time-web-2223/blob/main/public/img-docu/rtw-coffee-3.png" width="200">
 
 ## Installaties
 
@@ -332,6 +332,32 @@ Via google heb ik gezocht naar een geschikte koffie api, die heb ik uiteindelijk
 https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/RTW?type=design&node-id=0%3A1&t=0hGv0vOlIYrZswDr-1
 
 ## MoSCoW
+
+### Must have
+
+- Gebruikersnaam invullen + weergeven in de chat
+- Zien wie er online zijn
+- Berichten versturen en ontvangen naar andere gebruikers
+- Zien wie er aan het typen is
+- Koffie raden door middel van afbeelding + mogelijke antwoorden
+- Feedback ontvangen over antwoorden
+- Game kunnen restarten
+
+### Should have
+
+- Chat berichten onderscheiden met kleur en positie
+- Feedback in de chat weergeven als een gebruiker de game verlaat
+- Offline ondersteuning
+
+### Could have
+
+- Ranglijst weergeven
+- Ranglijst opslaan en per dag/ datum kunnen bekijken
+- Melding wanneer een gebruiker erbij komt
+
+### Would have
+
+- Verschillende chatrooms voor "hot" of "cold" koffie expert
 
 ## Real-Time Events
 
