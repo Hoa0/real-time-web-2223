@@ -372,9 +372,10 @@ Dit 'Data-lifecycle Model' bestaat uit vier compontenten: De gebruiker, client, 
 Communicatie tussen de server en de client:
 
 - `connection` Event wordt uitgevoerd wanneer de gebruiker verbinding maakt met de server
+- `history` oude chat berichten zien
 - `getRandomCoffee` Event haalt gegevens op uit de Coffee API en laat een koffie afbeelding + vier random antwoord mogelijkheden zien.
-- `guessCoffeeAnswer` Het afhandelen van geraden antwoorden en verstuur score en rondes naar de client.
-- `newMessage` Event waar gebruikers met elkaar kunnen communiceren via de chat
+- `guessCoffeeAnswer` Het afhandelen van geraden antwoorden en verstuur score en rondes naar de client. Het bijhouden van de score en rondes wordt in server gedaan.
+- `newMessage` Event waar gebruikers met elkaar kunnen communiceren via de chat. Chat berichten en gebruikersnamen worden meegegeven.
 - `newUser` Event wordt uigevoerd wanneer de gebruiker een nieuwe gebruiker aanmaakt en wordt toegevoegd aan 'active player' lijst.
 - `typing` Event laat zien of een gebruiker aan het typen is
 - `disconnect` Event geeft aan dat de client niet meer verbonden is met de server.
