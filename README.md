@@ -100,6 +100,8 @@ Concept 3: koffie API
 
 ## Data-lifecycle Model
 
+(https://www.figma.com/file/yAf5s9MTu8d8vqXphM2vrf/Untitled?type=design&node-id=0%3A1&t=fNDrcEqRgDAp1XZ6-)
+
 ## API
 
 Voor dit project heb ik gebruikt gemaakt van de [coffee-api](https://raw.githubusercontent.com/jermbo/SampleAPIs/main/server/api/coffee.json)
